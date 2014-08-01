@@ -19,8 +19,15 @@ function getRandomBool(num) {
   return Boolean(Math.floor(Math.random() * num));
 }
 
-function getRandomAnimateEffect() {
-  var effects = ['flash', 'bounce','shake','tada'];
+function getRandomAnimateEffectIn() {
+  var effects = ['flash','bounce','shake','tada',
+                 'rotateIn', 'bounceIn', 'fadeIn'];
+  return effects[Math.floor(Math.random()*effects.length)]
+}
+
+function getRandomAnimateEffectOut() {
+  var effects = ['flash', 'bounce', 'shake', 'tada',
+                 'rotateOut', 'bounceOut', 'fadeOut'];
   return effects[Math.floor(Math.random()*effects.length)]
 }
 
@@ -32,7 +39,7 @@ function executeEffect() {
     initialDelay: 0,
     autoStart: true,
     in: {
-      effect: getRandomAnimateEffect(),
+      effect: getRandomAnimateEffectIn(),
       // 2.0 ～ 20.0
       delayScale: Math.random()*18 + 2,
       // 10 ～ 100
@@ -41,7 +48,7 @@ function executeEffect() {
       shuffle: getRandomBool()
     },
     out: {
-      effect: getRandomAnimateEffect(),
+      effect: getRandomAnimateEffectOut(),
       delayScale: Math.random()*18 + 2,
       delay: Math.random()*90 + 10,
       sync: getRandomBool(),
