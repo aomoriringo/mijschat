@@ -45,10 +45,7 @@ $(document).ready(function () {
     socket.on('addUserResult', function (result) {
        var message;
        if (result.success) {
-           message = 'Welcome! New user ' + result.name + '.';
-           $('#login-parts').hide();
-           $('#chat').show();
-           $('#messages').append(divSystemContentElement(message));
+           chatApp.processCommand('/login ' + result.userName + ' ' + $('#login-pw').val());
        } else {
            $('#login-message').append(divSystemContentElement(result.message));
        }
@@ -75,7 +72,11 @@ $(document).ready(function () {
   });
 
   socket.on('message', function (message) {
-    var newElement = $('<div></div>').text(message.text);
+    var text = message.text;
+    if (message.userName !== undefined) {
+        text = message.userName + ' : ' + text;
+    }
+    var newElement = $('<div></div>').text(text);
     $('#messages').append(newElement);
   });
 

@@ -23,6 +23,16 @@ body {
     color: #fff;
     // submitボタンのを枠を非表示にする
     border-style: none;
+  .radius(4px, 0px);
+}
+
+.radius (@radius : 8px, @shadow : 10px) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  border-radius: @radius;
+  -moz-box-shadow: 0px 0px @shadow 0px #333333;
+  -webkit-box-shadow: 0px 0px @shadow 0px #333333;
+  box-shadow: 0px 0px @shadow 0px #333333;
 }
 
 /** ログイン画面 */
@@ -63,14 +73,12 @@ body {
 	font-family: inherit;
 	font-style: inherit;
 	text-decoration: inherit;
-	-webkit-border-radius: 8px;
-	-moz-border-radius: 8px;
-	border-radius: 8px;
-	-moz-box-shadow: 0px 0px 10px 0px #333333;
-	-webkit-box-shadow: 0px 0px 10px 0px #333333;
-	box-shadow: 0px 0px 10px 0px #333333;
+  .radius();
 }
-#room-list {width :150px; height :370px; border :#000000 solid 1px; background-color :#FFFFFF; float:right;}
+#room-list {
+  width :150px; height :370px; border :#000000 solid 1px; background-color :#FFFFFF; float:right;
+  .radius(5px, 0px);
+}
 #room-list > div {padding : 2px;}
 
 .default-border () {
@@ -82,6 +90,9 @@ body {
 #room {
     width :320px; 
     .default-border;
+  color: @default-color;
+  font-weight: bold;
+  .radius(5px, 0px);
 }
 
 #messages {
@@ -90,10 +101,12 @@ body {
     margin-top :5px; 
     overflow :auto;
     .default-border;
+  .radius(5px, 0px);
 }
 
 .self-message {
     color: @default-color;
+  .radius(5px, 0px);
 }
 
 #messages > div {border-bottom: #CACACA solid 1px; padding :5px; word-wrap :break-word;}
