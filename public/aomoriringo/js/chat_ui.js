@@ -16,7 +16,16 @@ function divEffectElement(message) {
 }
 
 function divUsernameElement(username) {
-  return $('<div class="username"></div>').text(username);
+  var elemUser = $('<div class="username"></div>');
+  var angle = getSha1Int(username) % 360;
+  elemUser.css({'color': 'hsl(' + angle.toString() + ', 50%, 50%)'});
+  return elemUser.text(username);
+}
+
+function getSha1Int(str) {
+  var shaObj = new jsSHA(str, "ASCII");
+  var shaDigest = shaObj.getHash("SHA-1", "HEX");
+  return parseInt(shaDigest, 16) % 1000000;
 }
 
 function getRandomBool(num) {
