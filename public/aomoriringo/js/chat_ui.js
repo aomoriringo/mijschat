@@ -69,10 +69,13 @@ function executeEffect() {
       shuffle: getRandomBool()
     }
   });
-  $('.rainbow').animate({color: '#000'}, 1000)
-               .animate({color: '#f0f'}, 1000)
+  $('.rainbow').animate({color: '#fff'}, 1000)
+               .animate({color: '#ff0'}, 1000)
                .animate({color: '#f00'}, 1000)
-               .animate({color: '#0f0'}, 1000);
+               .animate({color: '#f0f'}, 1000)
+               .animate({color: '#00f'}, 1000)
+               .animate({color: '#0ff'}, 1000)
+               .animate({color: '#fff'}, 1000);
     
 }
 
