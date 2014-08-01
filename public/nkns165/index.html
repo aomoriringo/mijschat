@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Sample1</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<link rel="stylesheet" href="../../libralies/jquery-ui.min.css">
+	<link rel="stylesheet" href="../stylesheets/sample1.css">
+	<script src="../../libralies/socket.io.js"></script>
+	<script src="../../libralies/jquery-2.1.1.min.js"></script>
+	<script src="../../libralies/jquery-ui.min.js"></script>
+	<script src="javascripts/chat.js.org"></script>
+	<script src="javascripts/chat_ui.js.org"></script>
+	<script src="javascripts/sample1.js"></script>
+</head>
+<body>
+	<div class="login">
+		ID:<input type="text" name="id" value="" class="login-id"/>
+		PW:<input type="text" name="pw" value="" class="login-pw"/>
+		<input type="button" value="ログイン" class="login-button" />
+	</div>
+
+	<div id="chat">
+		<div id="room-list"></div>
+		<div id="room">ルーム１</div>
+		<div id="messages"></div>
+		<form id="send-form">
+			<input type="text" id="send-message" />
+			<input type="button" id="send-message-btn" value="送信" />
+		</form>
+	</div>
+	
+	<div class="contents">
+		<div id="template" class="chat-room">
+		</div>
+	</div>
+</body>
+</html>
