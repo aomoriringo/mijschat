@@ -5,7 +5,7 @@ MIJS (Made in JavaScript) Chat
 
 # Install
     yum install nodejs npm
-    npm install mime socket.io
+    npm install mime socket.io pg
 
 # Usage
 
