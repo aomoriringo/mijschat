@@ -6,6 +6,14 @@ function divSystemContentElement(message) {
   return $('<div></div>').html('<i>' + message + '</i>');
 }
 
+function divEffectElement(message) {
+  return $('<div class="ef"></div>').text(message);
+}
+
+function executeEffect() {
+  $('.ef').textillate();
+}
+
 function processUserInput(chatApp, socket) {
   var message = $('#send-message').val();
   var systemMessage;
@@ -17,8 +25,9 @@ function processUserInput(chatApp, socket) {
     }
   } else {
     chatApp.sendMessage($('#room').text(), message);
-    $('#messages').append(divEscapedContentElement(message));
+    $('#messages').append(divEffectElement(message));
     $('#messages').scrollTop($('#messages').prop('scrollHeight'));
+    executeEffect();
   }
 
   $('#send-message').val('');
@@ -46,8 +55,8 @@ $(document).ready(function() {
   });
 
   socket.on('message', function (message) {
-    var newElement = $('<div></div>').text(message.text);
-    $('#messages').append(newElement);
+    $('#messages').append(divEffectElement(message.text));
+    executeEffect();
   });
 
   socket.on('rooms', function(rooms) {
