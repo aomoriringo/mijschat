@@ -17,7 +17,7 @@ function processUserInput(chatApp, socket) {
     }
   } else {
     chatApp.sendMessage($('#room').text(), message);
-    $('#messages').append(divEscapedContentElement(message).addClass('self-message'));
+    $('#messages').append(divEscapedContentElement(message));
     $('#messages').scrollTop($('#messages').prop('scrollHeight'));
   }
 
@@ -37,41 +37,43 @@ $(document).ready(function () {
         } else {
             message = result.message;
         }
-        if ($('#chat').is(':visible')) {
-            $('#messages').append(divSystemContentElement(message));
-        }
-    });
-
-    socket.on('addUserResult', function (result) {
-       var message;
-       if (result.success) {
-           message = 'Welcome! New user ' + result.name + '.';
-           $('#login-parts').hide();
-           $('#chat').show();
-           $('#messages').append(divSystemContentElement(message));
-       } else {
-           $('#login-message').append(divSystemContentElement(result.message));
-       }
+        $('#messages').append(divSystemContentElement(message));
     });
     
     socket.on('loginResult', function (result) {
         var message;
         
         if (result.success) {
-            message = 'Welcome! ' + result.name + '.';
-            $('#login-parts').hide();
-            $('#chat').show();
-            $('#messages').append(divSystemContentElement(message));
+            message = 'Welcome!' + result.name + '.';
+            chatApp.userId = result.userId;
         } else {
-            $('#login-message').append(divSystemContentElement(result.message));
+            message = result.message;
         }
+        $('#messages').append(divSystemContentElement(message));
+    });
+    
+    socket.on('addUserResult', function (result) {
+        var message;
+
+        message = result.message;
+        
+        $('#messages').append(divSystemContentElement(message));
+    });
+    
+    socket.on('updateUserResult', function (result) {
+        var message;
+        
+        if (result.success) {
+            chatApp.userId = result.userId;
+        }
+        message = result.message;
+        
+        $('#messages').append(divSystemContentElement(message));
     });
 
   socket.on('joinResult', function(result) {
     $('#room').text(result.room);
-      if ($('#chat').is(':visible')) {
-          $('#messages').append(divSystemContentElement('Room changed.'));
-      }
+    $('#messages').append(divSystemContentElement('Room changed.'));
   });
 
   socket.on('message', function (message) {
@@ -104,18 +106,5 @@ $(document).ready(function () {
   $('#send-form').submit(function() {
     processUserInput(chatApp, socket);
     return false;
-  });
-
-   $('#send-message-btn').click(function() {
-       processUserInput(chatApp, socket);
-       return false;
-   });
-
-  $('#signup').click(function() {
-      chatApp.processCommand('/addUser ' + $('#login-id').val() + ' ' + $('#login-pw').val());
-  });
-
-  $('#login').click(function() {
-      chatApp.processCommand('/login ' + $('#login-id').val() + ' ' + $('#login-pw').val());
   });
 });
