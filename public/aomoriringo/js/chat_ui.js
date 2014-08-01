@@ -7,7 +7,12 @@ function divSystemContentElement(message) {
 }
 
 function divEffectElement(message) {
-  return $('<div class="ef"></div>').text(message);
+  if (getRandomBool(4)){
+    return $('<div class="ef"></div>').text(message);
+  }
+  else {
+    return $('<div class="ef rainbow"></div>').text(message);
+  }
 }
 
 function getRandomBool(num) {
@@ -21,13 +26,22 @@ function getRandomBool(num) {
 
 function getRandomAnimateEffectIn() {
   var effects = ['flash','bounce','shake','tada',
-                 'rotateIn', 'bounceIn', 'fadeIn'];
+                 'rotateIn', 'bounceIn', 'fadeIn',
+                 'fadeUp', 'fadeInDown', 'fadeInLeft',
+                 'fadeInRight', 'fadeUpBig', 'fadeInDownBig',
+                 'fadeInLeftBig', 'fadeInRightBig',
+                 'bounceInDown','bounceInUp','bounceInLeft','bounceInRight',
+                 'rotateInDownLeft','rotateInDownRight','rotateInUpLeft','rotateInUpRight'];
   return effects[Math.floor(Math.random()*effects.length)]
 }
 
 function getRandomAnimateEffectOut() {
   var effects = ['flash', 'bounce', 'shake', 'tada',
-                 'rotateOut', 'bounceOut', 'fadeOut'];
+                 'rotateOut', 'bounceOut', 'fadeOut',
+                 'fadeOut','fadeOutUp','fadeOutDown',
+                 'fadeOutLeft','fadeOutRight','fadeOutUpBig',
+                 'fadeOutDownBig','fadeOutLeftBig','fadeOutRightBig',
+                 'rotateOutDownLeft','rotateOutDownRight','rotateOutUpLeft','rotateOutUpRight'];
   return effects[Math.floor(Math.random()*effects.length)]
 }
 
@@ -55,6 +69,11 @@ function executeEffect() {
       shuffle: getRandomBool()
     }
   });
+  $('.rainbow').animate({color: '#000'}, 1000)
+               .animate({color: '#f0f'}, 1000)
+               .animate({color: '#f00'}, 1000)
+               .animate({color: '#0f0'}, 1000);
+    
 }
 
 function processUserInput(chatApp, socket) {
