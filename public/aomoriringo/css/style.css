@@ -24,6 +24,10 @@ a {
   color: #ff0;
 }
 
+.username {
+  font-size: 15px;
+}
+
 #messages {
   font-size: 30px;
   width: 690px;
