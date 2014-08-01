@@ -10,13 +10,53 @@ function divEffectElement(message) {
   return $('<div class="ef"></div>').text(message);
 }
 
+function getRandomBool(num) {
+  // 2 の場合, true/falseが同確率
+  // 3 の場合, true:false = 2:1 の確率
+  if (typeof num === 'undefined'){
+    num = 2;
+  }
+  return Boolean(Math.floor(Math.random() * num));
+}
+
+function getRandomAnimateEffect() {
+  var effects = ['flash', 'bounce','shake','tada'];
+  return effects[Math.floor(Math.random()*effects.length)]
+}
+
 function executeEffect() {
-  $('.ef').textillate();
+  $('.ef').textillate({
+    // たまにループする
+    loop: !getRandomBool(7),
+    minDisplayTime: 2000,
+    initialDelay: 0,
+    autoStart: true,
+    in: {
+      effect: getRandomAnimateEffect(),
+      // 2.0 ～ 20.0
+      delayScale: Math.random()*18 + 2,
+      // 10 ～ 100
+      delay: Math.random()*90 + 10,
+      sync: getRandomBool(),
+      shuffle: getRandomBool()
+    },
+    out: {
+      effect: getRandomAnimateEffect(),
+      delayScale: Math.random()*18 + 2,
+      delay: Math.random()*90 + 10,
+      sync: getRandomBool(),
+      shuffle: getRandomBool()
+    }
+  });
 }
 
 function processUserInput(chatApp, socket) {
   var message = $('#send-message').val();
   var systemMessage;
+
+  if (message.length == 0) {
+    return;
+  }
 
   if (message.charAt(0) == '/') {
     systemMessage = chatApp.processCommand(message);
