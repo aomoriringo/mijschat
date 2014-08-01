@@ -5,6 +5,10 @@ body {
 
 /** 共通 */
 @default-color: #1111aa;
+.emphasis-size () {
+    font-size: 1.2em;
+    font-weight: bold;
+}
 .center () {
     text-align: center;
 }
@@ -12,7 +16,7 @@ body {
 .button-default {
     padding: 10px 30px;
     margin: 10px;
-    font-size: 1.2em;
+    .emphasis-size;
     // 背景色を黒に指定
     background-color: @default-color;
     // 文字色を白に指定
@@ -26,6 +30,7 @@ body {
     font-size: 40px;
     color: @default-color;
     .center;
+    margin: 40px auto 40px auto;
 }
 
 #login-div {
@@ -34,13 +39,21 @@ body {
 }
 
 .item {
-    width: 200px;
+    width: 80px;
+    display: inline-block;
+    .emphasis-size;
+    text-align: left;
+}
+
+.text {
+    .emphasis-size;
 }
 
 /** チャット画面 */
 #chat {
+    margin: 0px auto 0px auto;
 	width: 500px;
-	height: 400px;
+	height: 420px;
 	border: 1px #1e458a solid;
 	background-color: #f6fcfd;
 	padding: 18px;
@@ -59,8 +72,30 @@ body {
 }
 #room-list {width :150px; height :370px; border :#000000 solid 1px; background-color :#FFFFFF; float:right;}
 #room-list > div {padding : 2px;}
-#room {width :320px; border : #000000 solid 1px; padding :5px; background-color :#FFFFFF;}
-#messages {width :320px; height :326px; border :#000000 solid 1px; padding :5px; margin-top :5px; background-color :#FFFFFF; overflow :auto;}
+
+.default-border () {
+    border: #000000 solid 1px;
+    padding: 5px;
+    background-color: #FFFFFF;
+}
+
+#room {
+    width :320px; 
+    .default-border;
+}
+
+#messages {
+    width :320px; 
+    height :326px; 
+    margin-top :5px; 
+    overflow :auto;
+    .default-border;
+}
+
+.self-message {
+    color: @default-color;
+}
+
 #messages > div {border-bottom: #CACACA solid 1px; padding :5px; word-wrap :break-word;}
 #send-message {width :400px; padding :5px; autocomplete:off;}
 #send-message-btn {width :50px; padding :2px;}
