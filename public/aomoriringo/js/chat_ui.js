@@ -7,7 +7,7 @@ function divSystemContentElement(message) {
 }
 
 function divEffectElement(message) {
-  if (getRandomBool(4)){
+  if (getRandomBool(3)){
     return $('<div class="ef"></div>').text(message);
   }
   else {
