@@ -19,9 +19,9 @@ function sendFile(response, filePath, fileContents) {
 }
 
 function serveStatic(response, cache, absPath) {
-  if (cache[absPath]) {
-    sendFile(response, absPath, cache[absPath]);
-  } else {
+//  if (cache[absPath]) {
+//    sendFile(response, absPath, cache[absPath]);
+//  } else {
     fs.exists(absPath, function(exists) {
       if (exists) {
         fs.readFile(absPath, function(err, data) {
@@ -36,7 +36,7 @@ function serveStatic(response, cache, absPath) {
         send404(response);
       }
     });
-  }
+//  }
 }
 
 var server = http.createServer(function(request, response) {
