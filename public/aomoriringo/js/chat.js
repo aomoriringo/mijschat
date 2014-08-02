@@ -30,11 +30,38 @@ Chat.prototype.processCommand = function(command) {
       var room = words.join(' ');
       this.changeRoom(room);
       break;
+    /*
     case 'nick':
       words.shift();
       var name = words.join(' ');
       this.socket.emit('nameAttempt', name);
       break;
+    */
+    case 'login':
+      words.shift();
+            var name = words[0];
+            var password = words[1];
+      this.socket.emit('login', name, password);
+      break;
+    case 'adduser':
+        words.shift();
+            var name = words[0];
+            var password = words[1];
+        this.socket.emit('addUser', name, password);
+        break;
+    case 'updateuser':
+            words.shift();
+            var userId = this.userId;
+            var name = words[0];
+            var password = words[1];
+        this.socket.emit('updateUser', userId, name, password);
+        break;
+    case 'deleteuser':
+        words.shift();
+            var name = words[0];
+            var password = words[1];
+        this.socket.emit('deleteUser', name, password);
+        break;
     default:
       message = 'Unrecognized command.';
       break;
