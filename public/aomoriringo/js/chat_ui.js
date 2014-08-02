@@ -7,12 +7,25 @@ function divSystemContentElement(message) {
 }
 
 function divEffectElement(message) {
-  if (getRandomBool(3)){
+  if (getRandomBool(4)){
     return $('<div class="ef"></div>').text(message);
   }
   else {
     return $('<div class="ef rainbow"></div>').text(message);
   }
+}
+
+function divUsernameElement(username) {
+  var elemUser = $('<div class="username"></div>');
+  var angle = getSha1Int(username) % 360;
+  elemUser.css({'color': 'hsl(' + angle.toString() + ', 50%, 50%)'});
+  return elemUser.text(username);
+}
+
+function getSha1Int(str) {
+  var shaObj = new jsSHA(str, "ASCII");
+  var shaDigest = shaObj.getHash("SHA-1", "HEX");
+  return parseInt(shaDigest, 16) % 1000000;
 }
 
 function getRandomBool(num) {
@@ -56,8 +69,8 @@ function executeEffect() {
       effect: getRandomAnimateEffectIn(),
       // 2.0 ～ 20.0
       delayScale: Math.random()*18 + 2,
-      // 10 ～ 100
-      delay: Math.random()*90 + 10,
+      // 2.0 ～ 20.0
+      delay: Math.random()*18 + 2,
       sync: getRandomBool(),
       shuffle: getRandomBool()
     },
@@ -69,14 +82,13 @@ function executeEffect() {
       shuffle: getRandomBool()
     }
   });
-  $('.rainbow').animate({color: '#fff'}, 1000)
-               .animate({color: '#ff0'}, 1000)
-               .animate({color: '#f00'}, 1000)
-               .animate({color: '#f0f'}, 1000)
-               .animate({color: '#00f'}, 1000)
-               .animate({color: '#0ff'}, 1000)
-               .animate({color: '#fff'}, 1000);
-    
+  $('.rainbow').animate({color: '#fff'}, 200)
+               .animate({color: '#ff0'}, 200)
+               .animate({color: '#f00'}, 200)
+               .animate({color: '#f0f'}, 200)
+               .animate({color: '#00f'}, 200)
+               .animate({color: '#0ff'}, 200)
+               .animate({color: '#fff'}, 200);
 }
 
 function processUserInput(chatApp, socket) {
@@ -94,12 +106,17 @@ function processUserInput(chatApp, socket) {
     }
   } else {
     chatApp.sendMessage($('#room').text(), message);
-    $('#messages').append(divEffectElement(message));
+    printMessage(message, chatApp.username);
     $('#messages').scrollTop($('#messages').prop('scrollHeight'));
-    executeEffect();
   }
 
   $('#send-message').val('');
+}
+
+function printMessage(message, username){
+  $('#messages').append(divUsernameElement(username));
+  $('#messages').append(divEffectElement(message));
+  executeEffect();
 }
 
 var socket = io.connect();
@@ -111,7 +128,8 @@ $(document).ready(function() {
     var message;
 
     if (result.success) {
-      message = 'You are now known as ' + result.name + '.';
+      chatApp.username = result.name;
+      message = 'You are now known as ' + chatApp.username + '.';
     } else {
       message = result.message;
     }
@@ -124,8 +142,7 @@ $(document).ready(function() {
   });
 
   socket.on('message', function (message) {
-    $('#messages').append(divEffectElement(message.text));
-    executeEffect();
+    printMessage(message.text, message.username);
   });
 
   socket.on('rooms', function(rooms) {
