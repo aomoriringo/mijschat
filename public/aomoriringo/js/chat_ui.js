@@ -142,7 +142,7 @@ $(document).ready(function() {
   });
 
   socket.on('message', function (message) {
-    printMessage(message.text, message.userName);
+    printMessage(message.text, message.username);
   });
 
   socket.on('rooms', function(rooms) {
