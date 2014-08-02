@@ -164,7 +164,7 @@ $(document).ready(function() {
           message = result.message;
       }
       $('#messages').append(divSystemContentElement(message));
-   );
+  });
 
   socket.on('message', function (message) {
     printMessage(message.text, message.userName);
