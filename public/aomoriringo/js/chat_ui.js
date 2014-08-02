@@ -88,6 +88,16 @@ function executeEffect() {
                .animate({color: '#f0f'}, 200)
                .animate({color: '#00f'}, 200)
                .animate({color: '#0ff'}, 200)
+               .animate({color: '#ff0'}, 200)
+               .animate({color: '#f00'}, 200)
+               .animate({color: '#f0f'}, 200)
+               .animate({color: '#00f'}, 200)
+               .animate({color: '#0ff'}, 200)
+               .animate({color: '#ff0'}, 200)
+               .animate({color: '#f00'}, 200)
+               .animate({color: '#f0f'}, 200)
+               .animate({color: '#00f'}, 200)
+               .animate({color: '#0ff'}, 200)
                .animate({color: '#fff'}, 200);
 }
 
