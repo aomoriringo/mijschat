@@ -117,7 +117,6 @@ function processUserInput(chatApp, socket) {
   } else {
     chatApp.sendMessage($('#room').text(), message);
     printMessage(message, chatApp.username);
-    $('#messages').scrollTop($('#messages').prop('scrollHeight'));
   }
 
   $('#send-message').val('');
@@ -129,6 +128,7 @@ function printMessage(message, username){
   }
   $('#messages').append(divUsernameElement(username));
   $('#messages').append(divEffectElement(message));
+  $('#messages').scrollTop($('#messages').prop('scrollHeight'));
   executeEffect();
 }
 
