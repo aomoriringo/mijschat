@@ -124,6 +124,9 @@ function processUserInput(chatApp, socket) {
 }
 
 function printMessage(message, username){
+  if (username === undefined){
+    username = 'System';
+  }
   $('#messages').append(divUsernameElement(username));
   $('#messages').append(divEffectElement(message));
   executeEffect();
