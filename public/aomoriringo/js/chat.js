@@ -1,6 +1,7 @@
 var Chat = function(socket) {
   this.socket = socket;
   this.username = '';
+  this.userId = '';
 };
 
 Chat.prototype.sendMessage = function(room, text) {

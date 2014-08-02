@@ -154,6 +154,18 @@ $(document).ready(function() {
     $('#messages').append(divSystemContentElement('Room changed.'));
   });
 
+  socket.on('loginResult', function (result) {
+      var message;
+      if (result.success) {
+          message = 'Welcome!' + result.name + '.';
+            chatApp.userId = result.userId;
+            chatApp.username = result.userId;
+      } else {
+          message = result.message;
+      }
+      $('#messages').append(divSystemContentElement(message));
+   );
+
   socket.on('message', function (message) {
     printMessage(message.text, message.userName);
   });
